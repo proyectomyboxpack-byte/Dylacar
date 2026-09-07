@@ -3,6 +3,8 @@ import { productosEjemplo } from "@/lib/productos-ejemplo";
 import { notFound } from "next/navigation";
 import ProductoDetalle from "./ProductoDetalle";
 
+export const dynamic = "force-dynamic";
+
 async function getProducto(id: string) {
   const { data, error } = await supabase
     .from("productos")
@@ -11,7 +13,6 @@ async function getProducto(id: string) {
     .single();
 
   if (error || !data) {
-    // Fallback a productos de ejemplo mientras Supabase no tenga datos reales
     return productosEjemplo.find((p) => p.id === id) || null;
   }
 

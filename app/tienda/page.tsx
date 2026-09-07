@@ -2,12 +2,12 @@ import { supabase } from "@/lib/supabase";
 import { productosEjemplo } from "@/lib/productos-ejemplo";
 import TiendaClient from "./TiendaClient";
 
+export const dynamic = "force-dynamic";
+
 async function getProductos() {
   const { data, error } = await supabase.from("productos").select("*");
 
   if (error || !data || data.length === 0) {
-    // Mientras no haya productos reales cargados en Supabase,
-    // mostramos los de ejemplo para que la tienda no se vea vacía.
     return productosEjemplo;
   }
 
