@@ -2,6 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { Phone, MapPin, Mail } from "lucide-react";
 
+
 export default function Footer() {
   return (
     <footer className="border-t border-[var(--border)] bg-[var(--bg-card)]">
@@ -27,20 +28,43 @@ export default function Footer() {
         </div>
 
         <div>
-          <p className="mb-3 text-sm font-medium text-[var(--text)]">Contacto</p>
-          <ul className="space-y-2 text-sm text-[var(--text-muted)]">
-            <li className="flex items-center gap-2">
-              <Phone size={14} className="text-[var(--yellow)]" /> 55 0000 0000
-            </li>
-            <li className="flex items-center gap-2">
-              <Mail size={14} className="text-[var(--yellow)]" /> contacto@dylacar.com
-            </li>
-            <li className="flex items-center gap-2">
-              <MapPin size={14} className="text-[var(--yellow)]" /> Ciudad de México
-            </li>
-          </ul>
-        </div>
-      </div>
+  <h3 className="mb-4 font-semibold">Contacto</h3>
+  <ul className="space-y-3 text-sm text-[var(--text-muted)]">
+    <li className="flex items-center gap-3">
+      <Phone size={16} className="shrink-0 text-[var(--yellow)]" />
+      <a
+        href="tel:+525553536905"
+        className="transition-colors hover:text-[var(--yellow)]"
+      >
+        55 5353 6905
+      </a>
+    </li>
+    <li className="flex items-center gap-3">
+      <Mail size={16} className="shrink-0 text-[var(--yellow)]" />
+      <a
+        href="mailto:contacto@dylacar.com"
+        className="transition-colors hover:text-[var(--yellow)]"
+      >
+        contacto@dylacar.com
+      </a>
+    </li>
+    <li className="flex items-start gap-3">
+      <MapPin size={16} className="mt-0.5 shrink-0 text-[var(--yellow)]" />
+      <a
+        href="https://maps.google.com/?q=Avenida+Aquiles+Serdan+266+La+Preciosa+Azcapotzalco+CDMX+02460"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="not-italic transition-colors hover:text-[var(--yellow)]"
+      >
+        Av. Aquiles Serdán #266, Loc-3
+        <br />
+        Col. La Preciosa, Azcapotzalco
+        <br />
+        CDMX, C.P. 02460
+      </a>
+    </li>
+  </ul>
+</div>
 
       <div className="border-t border-[var(--border)] px-5 py-4 text-center text-xs text-[var(--text-muted)]">
         © {new Date().getFullYear()} Dylacar. Todos los derechos reservados.
