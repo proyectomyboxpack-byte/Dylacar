@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { Wrench, Disc3, BatteryCharging, Gauge, ArrowRight } from "lucide-react";
-import Car3DWrapper from "@/components/Car3DWrapper";
+import VehiculosHero from "@/components/VehiculosHero";
 import StatsSection from "@/components/StatsSection";
 import TiltCard from "@/components/TiltCard";
 import ParallaxHero from "@/components/ParallaxHero";
@@ -12,7 +12,7 @@ const servicios = [
     icon: Wrench,
     titulo: "Mantenimiento general",
     descripcion:
-      "Afinación, cambio de aceite y revisión completa para mantener tu auto en su mejor condición.",
+      "Afinación, cambio de aceite y revisión completa para mantener tu auto o moto en su mejor condición.",
   },
   {
     icon: Disc3,
@@ -37,7 +37,7 @@ const servicios = [
 export default function Home() {
   return (
     <main>
-      {/* Hero con auto 3D */}
+      {/* Hero con vehículos */}
       <section className="relative overflow-hidden border-b border-[var(--border)]">
         <ParallaxHero />
 
@@ -47,7 +47,7 @@ export default function Home() {
               Servicio automotriz premium · Refaccionaria
             </p>
             <h1 className="font-display max-w-2xl text-5xl font-bold leading-[1.05] sm:text-6xl">
-              Tu auto, en manos de gente que sabe lo que hace.
+              Tu auto y tu moto, en manos de gente que sabe lo que hace.
             </h1>
             <p className="mt-6 max-w-lg text-lg text-[var(--text-muted)]">
               Servicio automotriz honesto y refacciones originales, sin sorpresas
@@ -70,7 +70,7 @@ export default function Home() {
           </div>
 
           <div className="relative h-[280px] sm:h-[360px] lg:h-[420px]">
-            <Car3DWrapper />
+            <VehiculosHero />
           </div>
         </div>
       </section>
@@ -85,7 +85,8 @@ export default function Home() {
             Lo que hacemos en el taller
           </h2>
           <p className="mt-3 text-[var(--text-muted)]">
-            Cuatro áreas donde resolvemos la mayoría de lo que tu auto necesita.
+            Cuatro áreas donde resolvemos la mayoría de lo que tu vehículo
+            necesita.
           </p>
         </div>
 
