@@ -3,17 +3,6 @@
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
 
-/**
- * Reveal — envuelve cualquier bloque y lo anima al entrar a cuadro.
- * Estilo Apple: sube un poco y aparece. Se dispara una sola vez.
- *
- * Uso:
- *   <Reveal><h2>...</h2></Reveal>
- *   <Reveal delay={0.1}>...</Reveal>
- *
- * Para escalonar hijos (que entren uno tras otro), envuelve el
- * contenedor en <Reveal stagger> y cada hijo en <RevealItem>.
- */
 
 type RevealProps = {
   children: ReactNode;
