@@ -10,22 +10,7 @@ import {
   useReducedMotion,
 } from "framer-motion";
 
-/**
- * VideoHero — hero con video de fondo (opción B).
- *
- * Requisitos en /public:
- *   - /hero.mp4       (clip corto, en bucle, sin sonido — ver notas)
- *   - /hero-poster.jpg (primer cuadro, se muestra mientras carga el video)
- *
- * El video:
- *   - arranca solo, en silencio y en bucle (requisito para autoplay móvil)
- *   - lleva un velo oscuro encima para que el texto siempre se lea
- *   - hace un parallax suave: se aleja un poco al hacer scroll
- *   - si el usuario pidió menos movimiento, se queda el poster fijo
- *
- * Reemplaza a <VehiculosHero /> dentro del hero en page.tsx, o puedes
- * usar este como sección completa de ancho total.
- */
+
 
 export default function VideoHero() {
   const ref = useRef<HTMLDivElement>(null);
