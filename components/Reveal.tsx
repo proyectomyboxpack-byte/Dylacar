@@ -3,7 +3,6 @@
 import { motion, useReducedMotion, type Variants } from "framer-motion";
 import type { ReactNode } from "react";
 
-
 type RevealProps = {
   children: ReactNode;
   className?: string;
@@ -48,7 +47,7 @@ export function Reveal({
       variants={stagger ? contenedor : simple}
       initial="oculto"
       whileInView="visible"
-      viewport={{ once: true, margin: "-80px" }}
+      viewport={{ once: true, amount: 0.15 }}
     >
       {children}
     </motion.div>
