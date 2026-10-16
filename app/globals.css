@@ -1,11 +1,5 @@
 @import "tailwindcss";
 
-/* ============================================================
-   DYLACAR — sistema de diseño
-   Negro puro como lienzo, un solo acento (amarillo), sin tarjetas.
-   La jerarquía viene de la escala y el tracking, no del peso.
-   ============================================================ */
-
 @theme {
   /* --- Colores --- */
   --color-void: #000000; /* lienzo: todas las secciones */
