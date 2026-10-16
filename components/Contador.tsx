@@ -3,14 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { useInView, useReducedMotion } from "framer-motion";
 
-/**
- * Contador — anima un número de 0 a su valor al entrar a cuadro.
- * Soporta sufijo/prefijo: "15+", "24h", "2".
- *
- * Uso:
- *   <Contador valor={15} sufijo="+" />
- *   <Contador valor={24} sufijo="h" />
- */
+
 
 export default function Contador({
   valor,
