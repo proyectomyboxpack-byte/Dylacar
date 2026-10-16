@@ -10,6 +10,7 @@ import {
   useReducedMotion,
 } from "framer-motion";
 
+
 const MENSAJES = [
   {
     titulo: "El taller al que vuelves.",
@@ -42,17 +43,18 @@ export default function VideoHero() {
   const yVideo = useTransform(scrollYProgress, [0, 1], ["0%", "16%"]);
   const opacidadTexto = useTransform(scrollYProgress, [0, 0.6], [1, 0]);
 
-  // Relevo automático de mensajes
+  // Relevo automático. Sigue corriendo aunque el sistema pida menos
+  // movimiento: ahí sólo quitamos el desenfoque y el desplazamiento.
   useEffect(() => {
-    if (sinMovimiento || pausado) return;
+    if (pausado) return;
     const t = setTimeout(
       () => setActivo((i) => (i + 1) % MENSAJES.length),
       DURACION
     );
     return () => clearTimeout(t);
-  }, [activo, pausado, sinMovimiento]);
+  }, [activo, pausado]);
 
-  // No gastar batería ni saltar cuadros con la pestaña en segundo plano
+  // No gastar batería con la pestaña en segundo plano
   useEffect(() => {
     const alCambiar = () => {
       const v = videoRef.current;
@@ -66,6 +68,14 @@ export default function VideoHero() {
   }, []);
 
   const irA = useCallback((i: number) => setActivo(i), []);
+
+  // Sólo el mouse pausa. En táctil nunca llega el "salió el puntero".
+  const entroPuntero = useCallback((e: React.PointerEvent) => {
+    if (e.pointerType === "mouse") setPausado(true);
+  }, []);
+  const salioPuntero = useCallback((e: React.PointerEvent) => {
+    if (e.pointerType === "mouse") setPausado(false);
+  }, []);
 
   const mensaje = MENSAJES[activo];
 
@@ -108,16 +118,31 @@ export default function VideoHero() {
         {/* Caja de altura fija: los mensajes se enciman sin empujar nada */}
         <div
           className="relative h-[210px] sm:h-[235px] lg:h-[255px]"
-          onMouseEnter={() => setPausado(true)}
-          onMouseLeave={() => setPausado(false)}
+          onPointerEnter={entroPuntero}
+          onPointerLeave={salioPuntero}
         >
           <AnimatePresence initial={false}>
             <motion.div
               key={activo}
-              initial={{ opacity: 0, y: 26, filter: "blur(6px)" }}
-              animate={{ opacity: 1, y: 0, filter: "blur(0px)" }}
-              exit={{ opacity: 0, y: -16, filter: "blur(6px)" }}
-              transition={{ duration: 0.8, ease: [0.16, 1, 0.3, 1] }}
+              initial={
+                sinMovimiento
+                  ? { opacity: 0 }
+                  : { opacity: 0, y: 26, filter: "blur(6px)" }
+              }
+              animate={
+                sinMovimiento
+                  ? { opacity: 1 }
+                  : { opacity: 1, y: 0, filter: "blur(0px)" }
+              }
+              exit={
+                sinMovimiento
+                  ? { opacity: 0 }
+                  : { opacity: 0, y: -16, filter: "blur(6px)" }
+              }
+              transition={{
+                duration: sinMovimiento ? 0.25 : 0.8,
+                ease: [0.16, 1, 0.3, 1],
+              }}
               className="absolute inset-x-0 top-0"
             >
               <h1 className="max-w-[660px] text-[36px] leading-[1.06] text-bone sm:text-[52px] lg:text-[66px]">
@@ -139,34 +164,37 @@ export default function VideoHero() {
           </Link>
         </div>
 
-        {/* Marcas: se llenan como temporizador y se puede saltar entre ellas */}
-        {!sinMovimiento && (
-          <div className="mt-[38px] flex gap-[10px]">
-            {MENSAJES.map((m, i) => (
-              <button
-                key={m.titulo}
-                type="button"
-                onClick={() => irA(i)}
-                aria-label={`Ver: ${m.titulo}`}
-                className="group py-[10px] focus-visible:outline-none"
-              >
-                <span className="block h-[2px] w-[46px] overflow-hidden bg-white/20 transition-colors group-hover:bg-white/35 group-focus-visible:bg-white/50">
-                  <motion.span
-                    key={`${i}-${activo}-${pausado}`}
-                    className="block h-full w-full origin-left bg-amber"
-                    initial={{ scaleX: i < activo ? 1 : i === activo ? 0 : 0 }}
-                    animate={{ scaleX: i < activo ? 1 : i === activo ? 1 : 0 }}
-                    transition={{
-                      duration:
-                        i === activo && !pausado ? DURACION / 1000 : 0.35,
-                      ease: i === activo && !pausado ? "linear" : "easeOut",
-                    }}
-                  />
-                </span>
-              </button>
-            ))}
-          </div>
-        )}
+        {/* Marcas: temporizador y además botones para saltar */}
+        <div className="mt-[38px] flex gap-[10px]">
+          {MENSAJES.map((m, i) => (
+            <button
+              key={m.titulo}
+              type="button"
+              onClick={() => irA(i)}
+              aria-label={`Ver: ${m.titulo}`}
+              className="group py-[10px] focus-visible:outline-none"
+            >
+              <span className="block h-[2px] w-[46px] overflow-hidden bg-white/20 transition-colors group-hover:bg-white/35 group-focus-visible:bg-white/50">
+                <motion.span
+                  key={`${i}-${activo}-${pausado}`}
+                  className="block h-full w-full origin-left bg-amber"
+                  initial={{ scaleX: i < activo ? 1 : 0 }}
+                  animate={{ scaleX: i <= activo ? 1 : 0 }}
+                  transition={{
+                    duration:
+                      i === activo && !pausado && !sinMovimiento
+                        ? DURACION / 1000
+                        : 0.35,
+                    ease:
+                      i === activo && !pausado && !sinMovimiento
+                        ? "linear"
+                        : "easeOut",
+                  }}
+                />
+              </span>
+            </button>
+          ))}
+        </div>
       </motion.div>
     </section>
   );
