@@ -39,14 +39,15 @@ const cifras = [
   { valor: 24, sufijo: "h", etiqueta: "Respuesta a cotizaciones" },
 ];
 
+
 export default function Home() {
   return (
-    <main className="bg-void">
-      {/* ================= HERO CON VIDEO (B) ================= */}
+    <main>
+      {/* ================= HERO CON VIDEO ================= */}
       <VideoHero />
 
       {/* ================= CIFRAS ================= */}
-      <section className="mx-auto max-w-[1280px] px-6 py-[60px] lg:px-10">
+      <section className="relative mx-auto max-w-[1280px] px-6 py-[60px] lg:px-10">
         <Reveal stagger className="grid gap-[36px] sm:grid-cols-3">
           {cifras.map((c) => (
             <RevealItem key={c.etiqueta}>
@@ -64,7 +65,7 @@ export default function Home() {
       {/* ================= SERVICIOS ================= */}
       <section
         id="servicios"
-        className="mx-auto max-w-[1280px] px-6 py-[96px] lg:px-10 lg:py-[120px]"
+        className="relative mx-auto max-w-[1280px] px-6 py-[96px] lg:px-10 lg:py-[120px]"
       >
         <div className="grid gap-[60px] lg:grid-cols-[1fr_1.1fr] lg:gap-[96px]">
           <Reveal className="lg:sticky lg:top-[96px] lg:self-start">
@@ -103,7 +104,7 @@ export default function Home() {
       <FaqSection />
 
       {/* ================= CTA TIENDA ================= */}
-      <section className="mx-auto max-w-[1280px] px-6 py-[96px] lg:px-10 lg:py-[120px]">
+      <section className="relative mx-auto max-w-[1280px] px-6 py-[96px] lg:px-10 lg:py-[120px]">
         <Reveal>
           <p className="eyebrow">Refaccionaria</p>
           <h2 className="mt-[24px] max-w-[760px] text-[42px] leading-[1.1] text-bone lg:text-[78px]">
