@@ -11,7 +11,6 @@ import {
 } from "framer-motion";
 
 
-
 export default function VideoHero() {
   const ref = useRef<HTMLDivElement>(null);
   const sinMovimiento = useReducedMotion();
@@ -29,12 +28,12 @@ export default function VideoHero() {
   return (
     <section
       ref={ref}
-      className="relative flex min-h-[88vh] items-center overflow-hidden"
+      className="relative isolate flex min-h-[88vh] items-center overflow-hidden"
     >
-      {/* Capa de video */}
+      {/* Capa 0: el video */}
       <motion.div
         style={sinMovimiento ? undefined : { scale: escala, y }}
-        className="absolute inset-0 -z-10"
+        className="absolute inset-0 z-0"
       >
         <video
           className="h-full w-full object-cover"
@@ -43,27 +42,29 @@ export default function VideoHero() {
           loop
           playsInline
           poster="/hero-poster.jpg"
-          preload="metadata"
+          preload="auto"
         >
+          <source src="/hero.webm" type="video/webm" />
           <source src="/hero.mp4" type="video/mp4" />
         </video>
       </motion.div>
 
-      {/* Velo oscuro: degradado para que el texto se lea siempre */}
+      {/* Capa 10: velos oscuros para que el texto siempre se lea */}
       <div
         aria-hidden
-        className="absolute inset-0 -z-10
-                   bg-gradient-to-r from-black via-black/80 to-black/30"
+        className="absolute inset-0 z-10
+                   bg-gradient-to-r from-black via-black/75 to-black/20"
       />
       <div
         aria-hidden
-        className="absolute inset-0 -z-10 bg-gradient-to-t from-black via-transparent to-black/40"
+        className="absolute inset-0 z-10
+                   bg-gradient-to-t from-black via-transparent to-black/40"
       />
 
-      {/* Contenido */}
+      {/* Capa 20: contenido */}
       <motion.div
         style={sinMovimiento ? undefined : { opacity: opacidadTexto }}
-        className="mx-auto w-full max-w-[1280px] px-6 py-[96px] lg:px-10"
+        className="relative z-20 mx-auto w-full max-w-[1280px] px-6 py-[96px] lg:px-10"
       >
         <div className="max-w-[720px]">
           <p className="eyebrow">Servicio automotriz · Refaccionaria</p>
