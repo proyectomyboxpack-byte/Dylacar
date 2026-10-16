@@ -1,32 +1,28 @@
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 import VideoHero from "@/components/VideoHero";
 import { Reveal, RevealItem } from "@/components/Reveal";
 import Contador from "@/components/Contador";
 import TestimoniosSection from "@/components/TestimoniosSection";
 import FaqSection from "@/components/FaqSection";
 
+
 const servicios = [
   {
-    numero: "01",
     titulo: "Mantenimiento general",
     descripcion:
       "Afinación, cambio de aceite y revisión completa para mantener tu auto o moto en su mejor condición.",
   },
   {
-    numero: "02",
     titulo: "Frenos y suspensión",
     descripcion:
       "Cambio de balatas, discos y componentes de suspensión con piezas de calidad garantizada.",
   },
   {
-    numero: "03",
     titulo: "Sistema eléctrico",
     descripcion:
       "Diagnóstico y reparación eléctrica, baterías, alternadores y arneses.",
   },
   {
-    numero: "04",
     titulo: "Diagnóstico computarizado",
     descripcion:
       "Escaneo de fallas con equipo especializado para identificar el problema real, sin adivinar.",
@@ -35,26 +31,24 @@ const servicios = [
 
 const cifras = [
   { valor: 15, sufijo: "+", etiqueta: "Años en el oficio" },
-  { valor: 2, sufijo: "", etiqueta: "Autos y motos" },
   { valor: 24, sufijo: "h", etiqueta: "Respuesta a cotizaciones" },
+  { valor: 3, sufijo: " meses", etiqueta: "Garantía en mano de obra" },
 ];
-
 
 export default function Home() {
   return (
     <main>
-      {/* ================= HERO CON VIDEO ================= */}
       <VideoHero />
 
       {/* ================= CIFRAS ================= */}
-      <section className="relative mx-auto max-w-[1280px] px-6 py-[60px] lg:px-10">
-        <Reveal stagger className="grid gap-[36px] sm:grid-cols-3">
+      <section className="relative mx-auto max-w-[1280px] px-6 py-[72px] lg:px-10 lg:py-[96px]">
+        <Reveal stagger className="grid gap-[40px] sm:grid-cols-3">
           {cifras.map((c) => (
             <RevealItem key={c.etiqueta}>
-              <p className="text-[42px] leading-[1.1] tracking-[-0.04em] text-bone lg:text-[48px]">
+              <p className="text-[44px] leading-[1.05] tracking-[-0.04em] text-bone lg:text-[52px]">
                 <Contador valor={c.valor} sufijo={c.sufijo} />
               </p>
-              <p className="mt-[6px] text-[14px] font-normal uppercase tracking-[0.025em] text-ash">
+              <p className="mt-[8px] text-[15px] font-extralight text-ash">
                 {c.etiqueta}
               </p>
             </RevealItem>
@@ -65,58 +59,57 @@ export default function Home() {
       {/* ================= SERVICIOS ================= */}
       <section
         id="servicios"
-        className="relative mx-auto max-w-[1280px] px-6 py-[96px] lg:px-10 lg:py-[120px]"
+        className="relative mx-auto max-w-[1280px] px-6 pb-[96px] lg:px-10 lg:pb-[120px]"
       >
-        <div className="grid gap-[60px] lg:grid-cols-[1fr_1.1fr] lg:gap-[96px]">
+        <div className="grid gap-[56px] lg:grid-cols-[1fr_1.25fr] lg:gap-[96px]">
           <Reveal className="lg:sticky lg:top-[96px] lg:self-start">
-            <p className="eyebrow">Lo que hacemos</p>
-            <h2 className="mt-[24px] text-[42px] leading-[1.1] text-bone lg:text-[78px]">
-              Cuatro áreas, un solo taller.
+            <h2 className="text-[38px] leading-[1.08] text-bone lg:text-[60px]">
+              Lo que resolvemos aquí mismo.
             </h2>
-            <p className="mt-[24px] max-w-[420px] text-[18px] font-extralight text-mist">
-              Resolvemos la mayoría de lo que tu vehículo necesita, sin mandarte
-              a otro lado.
+            <p className="mt-[22px] max-w-[400px] text-[18px] font-extralight leading-[1.55] text-mist">
+              Sin mandarte a otro taller por la mitad del trabajo.
             </p>
           </Reveal>
 
-          <Reveal stagger className="flex flex-col gap-[60px]">
-            {servicios.map((s) => (
-              <RevealItem key={s.titulo} className="flex gap-[24px]">
-                <span className="mt-[6px] shrink-0 text-[14px] font-semibold tracking-[0.025em] text-amber">
-                  {s.numero}
-                </span>
-                <div>
-                  <h3 className="text-[27px] leading-[1.1] text-bone">
-                    {s.titulo}
-                  </h3>
-                  <p className="mt-[12px] max-w-[460px] text-[18px] font-extralight leading-[1.5] text-mist">
-                    {s.descripcion}
-                  </p>
-                </div>
+          {/* Las líneas separan los servicios; no son pasos, así que no
+              van numerados. */}
+          <Reveal stagger className="flex flex-col">
+            {servicios.map((s, i) => (
+              <RevealItem
+                key={s.titulo}
+                className={
+                  i === 0
+                    ? "py-[28px]"
+                    : "border-t border-white/10 py-[28px]"
+                }
+              >
+                <h3 className="text-[25px] leading-[1.15] text-bone">
+                  {s.titulo}
+                </h3>
+                <p className="mt-[10px] max-w-[460px] text-[17px] font-extralight leading-[1.55] text-mist">
+                  {s.descripcion}
+                </p>
               </RevealItem>
             ))}
           </Reveal>
         </div>
       </section>
 
-      {/* ================= TESTIMONIOS Y FAQ ================= */}
       <TestimoniosSection />
       <FaqSection />
 
       {/* ================= CTA TIENDA ================= */}
       <section className="relative mx-auto max-w-[1280px] px-6 py-[96px] lg:px-10 lg:py-[120px]">
         <Reveal>
-          <p className="eyebrow">Refaccionaria</p>
-          <h2 className="mt-[24px] max-w-[760px] text-[42px] leading-[1.1] text-bone lg:text-[78px]">
+          <h2 className="max-w-[720px] text-[38px] leading-[1.08] text-bone lg:text-[60px]">
             ¿Ya sabes qué pieza necesitas?
           </h2>
-          <p className="mt-[24px] max-w-[480px] text-[18px] font-extralight text-mist">
-            Cómprala directo en línea, con pago seguro y entrega o recolección en
-            taller.
+          <p className="mt-[22px] max-w-[460px] text-[18px] font-extralight leading-[1.55] text-mist">
+            Cómprala en línea y recógela en el taller, o te la enviamos.
           </p>
-          <div className="mt-[36px]">
+          <div className="mt-[34px]">
             <Link href="/tienda" className="btn-primary">
-              Ir a la tienda <ArrowRight size={15} />
+              Ir a la tienda
             </Link>
           </div>
         </Reveal>
