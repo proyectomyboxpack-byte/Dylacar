@@ -1,6 +1,8 @@
 import Link from "next/link";
 import { ArrowRight } from "lucide-react";
-import VehiculosHero from "@/components/VehiculosHero";
+import VideoHero from "@/components/VideoHero";
+import { Reveal, RevealItem } from "@/components/Reveal";
+import Contador from "@/components/Contador";
 import TestimoniosSection from "@/components/TestimoniosSection";
 import FaqSection from "@/components/FaqSection";
 
@@ -32,63 +34,31 @@ const servicios = [
 ];
 
 const cifras = [
-  { valor: "15+", etiqueta: "Años en el oficio" },
-  { valor: "2", etiqueta: "Autos y motos" },
-  { valor: "24h", etiqueta: "Respuesta a cotizaciones" },
+  { valor: 15, sufijo: "+", etiqueta: "Años en el oficio" },
+  { valor: 2, sufijo: "", etiqueta: "Autos y motos" },
+  { valor: 24, sufijo: "h", etiqueta: "Respuesta a cotizaciones" },
 ];
 
 export default function Home() {
   return (
     <main className="bg-void">
-      {/* ================= HERO ================= */}
-      <section className="mx-auto max-w-[1280px] px-6 pb-[96px] pt-[60px] lg:px-10 lg:pb-[120px] lg:pt-[96px]">
-        <div className="grid items-center gap-[60px] lg:grid-cols-[1fr_1fr] lg:gap-[36px]">
-          <div>
-            <p className="eyebrow">Servicio automotriz · Refaccionaria</p>
-
-            <h1
-              className="mt-[24px] text-[48px] leading-[1.05] text-bone
-                         sm:text-[78px] lg:text-[96px] xl:text-[113px]"
-            >
-              Tu auto, en manos que saben.
-            </h1>
-
-            <p className="mt-[30px] max-w-[480px] text-[18px] font-extralight leading-[1.5] text-mist">
-              Servicio honesto y refacciones originales, sin sorpresas en la
-              cuenta ni tiempos de espera eternos. Autos y motos, con el mismo
-              nivel de detalle.
-            </p>
-
-            <div className="mt-[36px] flex flex-wrap items-center gap-[30px]">
-              <Link href="/tienda" className="btn-primary">
-                Ver refacciones <ArrowRight size={15} />
-              </Link>
-              <Link href="/citas" className="btn-ghost">
-                Agendar servicio
-              </Link>
-            </div>
-          </div>
-
-          <div className="relative h-[280px] sm:h-[380px] lg:h-[480px]">
-            <VehiculosHero />
-          </div>
-        </div>
-      </section>
+      {/* ================= HERO CON VIDEO (B) ================= */}
+      <VideoHero />
 
       {/* ================= CIFRAS ================= */}
       <section className="mx-auto max-w-[1280px] px-6 py-[60px] lg:px-10">
-        <div className="grid gap-[36px] sm:grid-cols-3">
+        <Reveal stagger className="grid gap-[36px] sm:grid-cols-3">
           {cifras.map((c) => (
-            <div key={c.etiqueta}>
+            <RevealItem key={c.etiqueta}>
               <p className="text-[42px] leading-[1.1] tracking-[-0.04em] text-bone lg:text-[48px]">
-                {c.valor}
+                <Contador valor={c.valor} sufijo={c.sufijo} />
               </p>
               <p className="mt-[6px] text-[14px] font-normal uppercase tracking-[0.025em] text-ash">
                 {c.etiqueta}
               </p>
-            </div>
+            </RevealItem>
           ))}
-        </div>
+        </Reveal>
       </section>
 
       {/* ================= SERVICIOS ================= */}
@@ -97,7 +67,7 @@ export default function Home() {
         className="mx-auto max-w-[1280px] px-6 py-[96px] lg:px-10 lg:py-[120px]"
       >
         <div className="grid gap-[60px] lg:grid-cols-[1fr_1.1fr] lg:gap-[96px]">
-          <div className="lg:sticky lg:top-[96px] lg:self-start">
+          <Reveal className="lg:sticky lg:top-[96px] lg:self-start">
             <p className="eyebrow">Lo que hacemos</p>
             <h2 className="mt-[24px] text-[42px] leading-[1.1] text-bone lg:text-[78px]">
               Cuatro áreas, un solo taller.
@@ -106,12 +76,11 @@ export default function Home() {
               Resolvemos la mayoría de lo que tu vehículo necesita, sin mandarte
               a otro lado.
             </p>
-          </div>
+          </Reveal>
 
-          {/* Sin tarjetas ni bordes: los bloques flotan sobre el negro */}
-          <div className="flex flex-col gap-[60px]">
+          <Reveal stagger className="flex flex-col gap-[60px]">
             {servicios.map((s) => (
-              <div key={s.titulo} className="flex gap-[24px]">
+              <RevealItem key={s.titulo} className="flex gap-[24px]">
                 <span className="mt-[6px] shrink-0 text-[14px] font-semibold tracking-[0.025em] text-amber">
                   {s.numero}
                 </span>
@@ -123,9 +92,9 @@ export default function Home() {
                     {s.descripcion}
                   </p>
                 </div>
-              </div>
+              </RevealItem>
             ))}
-          </div>
+          </Reveal>
         </div>
       </section>
 
@@ -135,19 +104,21 @@ export default function Home() {
 
       {/* ================= CTA TIENDA ================= */}
       <section className="mx-auto max-w-[1280px] px-6 py-[96px] lg:px-10 lg:py-[120px]">
-        <p className="eyebrow">Refaccionaria</p>
-        <h2 className="mt-[24px] max-w-[760px] text-[42px] leading-[1.1] text-bone lg:text-[78px]">
-          ¿Ya sabes qué pieza necesitas?
-        </h2>
-        <p className="mt-[24px] max-w-[480px] text-[18px] font-extralight text-mist">
-          Cómprala directo en línea, con pago seguro y entrega o recolección en
-          taller.
-        </p>
-        <div className="mt-[36px]">
-          <Link href="/tienda" className="btn-primary">
-            Ir a la tienda <ArrowRight size={15} />
-          </Link>
-        </div>
+        <Reveal>
+          <p className="eyebrow">Refaccionaria</p>
+          <h2 className="mt-[24px] max-w-[760px] text-[42px] leading-[1.1] text-bone lg:text-[78px]">
+            ¿Ya sabes qué pieza necesitas?
+          </h2>
+          <p className="mt-[24px] max-w-[480px] text-[18px] font-extralight text-mist">
+            Cómprala directo en línea, con pago seguro y entrega o recolección en
+            taller.
+          </p>
+          <div className="mt-[36px]">
+            <Link href="/tienda" className="btn-primary">
+              Ir a la tienda <ArrowRight size={15} />
+            </Link>
+          </div>
+        </Reveal>
       </section>
     </main>
   );
