@@ -2,9 +2,9 @@ import Link from "next/link";
 import VideoHero from "@/components/VideoHero";
 import { Reveal, RevealItem } from "@/components/Reveal";
 import Contador from "@/components/Contador";
+import ProcesoSection from "@/components/ProcesoSection";
 import TestimoniosSection from "@/components/TestimoniosSection";
 import FaqSection from "@/components/FaqSection";
-
 
 const servicios = [
   {
@@ -78,9 +78,7 @@ export default function Home() {
               <RevealItem
                 key={s.titulo}
                 className={
-                  i === 0
-                    ? "py-[28px]"
-                    : "border-t border-white/10 py-[28px]"
+                  i === 0 ? "py-[28px]" : "border-t border-white/10 py-[28px]"
                 }
               >
                 <h3 className="text-[25px] leading-[1.15] text-bone">
@@ -94,6 +92,9 @@ export default function Home() {
           </Reveal>
         </div>
       </section>
+
+      {/* ================= CÓMO TRABAJAMOS ================= */}
+      <ProcesoSection />
 
       <TestimoniosSection />
       <FaqSection />
