@@ -4,6 +4,7 @@ import "./globals.css";
 import Navbar from "@/components/Navbar";
 import Footer from "@/components/Footer";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import FondoAmbiente from "@/components/FondoAmbiente";
 import { CartProvider } from "@/lib/cart-context";
 import { AuthProvider } from "@/lib/auth-context";
 
@@ -34,6 +35,7 @@ export default function RootLayout({
       <body className={`${inter.variable} ${barlow.variable} antialiased`}>
         <AuthProvider>
           <CartProvider>
+            <FondoAmbiente />
             <Navbar />
             {children}
             <Footer />
