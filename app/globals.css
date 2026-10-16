@@ -1,14 +1,59 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@200;300;400;600&display=swap");
 @import "tailwindcss";
 
+/* ============================================================
+   DYLACAR — sistema de diseño
+   Negro puro como lienzo, un solo acento (amarillo), sin tarjetas.
+   La jerarquía viene de la escala y el tracking, no del peso.
+   ============================================================ */
+
+@theme {
+  /* --- Colores --- */
+  --color-void: #000000; /* lienzo: todas las secciones */
+  --color-bone: #ffffff; /* titulares, texto principal */
+  --color-ash: #8a8a8a; /* nav inactivo, texto secundario */
+  --color-mist: #b8b8b8; /* texto terciario, pies de foto */
+  --color-amber: #ffb800; /* ACCIÓN: botones, marca */
+  --color-amber-dim: #e0a200; /* hover del botón */
+  --color-steel: #6e6e73; /* gris metálico del logo */
+
+  /* --- Tipografía --- */
+  --font-display: "Inter", ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, sans-serif;
+
+  --text-caption: 12px;
+  --text-label: 14px;
+  --text-body: 18px;
+  --text-heading-2xs: 24px;
+  --text-heading-xs: 27px;
+  --text-subheading: 36px;
+  --text-heading-sm: 42px;
+  --text-heading: 48px;
+  --text-heading-lg: 78px;
+  --text-hero: 113px;
+
+  /* --- Espaciado: unidad base de 6px --- */
+  --spacing-6: 6px;
+  --spacing-12: 12px;
+  --spacing-18: 18px;
+  --spacing-24: 24px;
+  --spacing-30: 30px;
+  --spacing-36: 36px;
+  --spacing-60: 60px;
+  --spacing-96: 96px;
+  --spacing-120: 120px;
+
+  /* --- Radios --- */
+  --radius-3xl: 24px;
+  --radius-full: 9999px;
+}
+
+/* ============================================================
+   Base
+   ============================================================ */
+
 :root {
-  --bg: #0f0f10;
-  --bg-card: #19191b;
-  --bg-card-hover: #202023;
-  --border: #2b2b2e;
-  --text: #fafafa;
-  --text-muted: #a8a8ac;
-  --yellow: #f5c518;
-  --yellow-dim: #d9ac0e;
+  color-scheme: dark;
 }
 
 html {
@@ -16,27 +61,103 @@ html {
 }
 
 body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--font-inter), system-ui, sans-serif;
+  background: var(--color-void);
+  color: var(--color-bone);
+  font-family: var(--font-display);
+  font-weight: 200; /* cuerpo ultra ligero: es la firma del sistema */
+  font-size: var(--text-body);
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
 }
 
-.font-display {
-  font-family: var(--font-barlow), system-ui, sans-serif;
+/* Titulares: siempre peso 400, nunca negritas.
+   La jerarquía la da el tamaño y el tracking negativo. */
+h1,
+h2,
+h3 {
+  font-weight: 400;
+  line-height: 1.1;
+}
+
+h1 {
+  letter-spacing: -0.04em;
+}
+
+h2 {
+  letter-spacing: -0.035em;
+}
+
+h3 {
+  letter-spacing: -0.02em;
 }
 
 ::selection {
-  background: var(--yellow);
-  color: #0f0f10;
+  background: var(--color-amber);
+  color: #000;
 }
 
 :focus-visible {
-  outline: 2px solid var(--yellow);
-  outline-offset: 2px;
+  outline: 2px solid var(--color-amber);
+  outline-offset: 3px;
+}
+
+/* ============================================================
+   Utilidades del sistema
+   ============================================================ */
+
+/* Etiqueta pequeña en mayúsculas que va encima de cada bloque */
+.eyebrow {
+  font-size: var(--text-label);
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  color: var(--color-amber);
+}
+
+/* Botón de acción: píldora amarilla. Uno solo por vista. */
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: var(--color-amber);
+  color: #000;
+  font-size: var(--text-label);
+  font-weight: 600;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  padding: 14px 24px;
+  border-radius: var(--radius-full);
+  transition: background 0.2s ease;
+}
+
+.btn-primary:hover {
+  background: var(--color-amber-dim);
+}
+
+/* Acción secundaria: texto pelón, sin contenedor */
+.btn-ghost {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--color-ash);
+  font-size: var(--text-label);
+  font-weight: 400;
+  letter-spacing: 0.025em;
+  text-transform: uppercase;
+  transition: color 0.2s ease;
+}
+
+.btn-ghost:hover {
+  color: var(--color-bone);
 }
 
 @media (prefers-reduced-motion: reduce) {
-  * {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
