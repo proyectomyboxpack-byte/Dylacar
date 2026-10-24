@@ -13,7 +13,7 @@ import {
 
 const MENSAJES = [
   {
-    titulo: "El taller al que vuelves.",
+    titulo: "Llegas con un problema. Te vas con la solución.",
     texto: "Autos y motos, atendidos por gente que lleva años en el oficio.",
   },
   {
